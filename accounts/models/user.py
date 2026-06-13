@@ -18,4 +18,18 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from .user import User                                            # noqa: F401
+from django.contrib.auth.models import AbstractUser
+from django.db import models
+
+
+class User(AbstractUser):
+    """
+    Custom user model
+    """
+    email = models.EmailField(unique=True)
+
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['email']
+
+    def __str__(self):
+        return self.username

@@ -18,4 +18,10 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from .user import User                                            # noqa: F401
+from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+
+from .models import User
+
+
+admin.site.register(User, UserAdmin)
