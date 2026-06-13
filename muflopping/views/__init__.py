@@ -17,26 +17,3 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
-
-import django.conf
-from django.contrib import admin
-from django.urls import include, path
-
-from drf_spectacular.views import (SpectacularAPIView,
-                                   SpectacularSwaggerView)
-
-
-urlpatterns = [
-    path(route=django.conf.settings.ADMIN_URL,
-         view=admin.site.urls),
-    path(route='api/',
-         view=include('muflopping.urls')),
-    path(route='api/accounts/',
-         view=include('accounts.urls')),
-    path(route='api/schema/',
-         view=SpectacularAPIView.as_view(),
-         name='schema'),
-    path(route='api/swagger/',
-         view=SpectacularSwaggerView.as_view(),
-         name='swagger-ui'),
-]

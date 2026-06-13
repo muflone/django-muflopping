@@ -17,3 +17,10 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
+
+from django.contrib import admin
+
+from .models.category import Category, CategoryAdmin
+
+
+admin.site.register(Category, CategoryAdmin)

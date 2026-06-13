@@ -18,25 +18,30 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-import django.conf
 from django.contrib import admin
-from django.urls import include, path
-
-from drf_spectacular.views import (SpectacularAPIView,
-                                   SpectacularSwaggerView)
+from django.db import models
 
 
-urlpatterns = [
-    path(route=django.conf.settings.ADMIN_URL,
-         view=admin.site.urls),
-    path(route='api/',
-         view=include('muflopping.urls')),
-    path(route='api/accounts/',
-         view=include('accounts.urls')),
-    path(route='api/schema/',
-         view=SpectacularAPIView.as_view(),
-         name='schema'),
-    path(route='api/swagger/',
-         view=SpectacularSwaggerView.as_view(),
-         name='swagger-ui'),
-]
+class Category(models.Model):
+    """
+    Product category
+    """
+    name = models.CharField(
+        max_length=100,
+        unique=True,
+    )
+    order = models.PositiveIntegerField(
+        default=0,
+    )
+
+    class Meta:
+        ordering = ['order', 'name']
+        verbose_name_plural = 'categories'
+
+    def __str__(self):
+        return self.name
+
+
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'order')
+    ordering = ('order', 'name')

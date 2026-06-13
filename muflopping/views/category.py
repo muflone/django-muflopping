@@ -18,25 +18,25 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-import django.conf
-from django.contrib import admin
-from django.urls import include, path
+from rest_framework import generics, permissions
 
-from drf_spectacular.views import (SpectacularAPIView,
-                                   SpectacularSwaggerView)
+from muflopping.models.category import Category
+from muflopping.serializers.category import CategorySerializer
 
 
-urlpatterns = [
-    path(route=django.conf.settings.ADMIN_URL,
-         view=admin.site.urls),
-    path(route='api/',
-         view=include('muflopping.urls')),
-    path(route='api/accounts/',
-         view=include('accounts.urls')),
-    path(route='api/schema/',
-         view=SpectacularAPIView.as_view(),
-         name='schema'),
-    path(route='api/swagger/',
-         view=SpectacularSwaggerView.as_view(),
-         name='swagger-ui'),
-]
+class CategoryListCreateView(generics.ListCreateAPIView):
+    """
+    GET/POST /api/products/categories/
+    """
+    serializer_class = CategorySerializer
+    permission_classes = [permissions.DjangoModelPermissions]
+    queryset = Category.objects.all()
+
+
+class CategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    GET/PUT/PATCH/DELETE /api/products/categories/<pk>/
+    """
+    serializer_class = CategorySerializer
+    permission_classes = [permissions.DjangoModelPermissions]
+    queryset = Category.objects.all()
