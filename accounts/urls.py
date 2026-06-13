@@ -18,23 +18,17 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-import django.conf
-from django.contrib import admin
-from django.urls import include, path
+from django.urls import path
 
-from drf_spectacular.views import (SpectacularAPIView,
-                                   SpectacularSwaggerView)
+from rest_framework_simplejwt.views import (TokenObtainPairView,
+                                            TokenRefreshView)
 
 
 urlpatterns = [
-    path(route=django.conf.settings.ADMIN_URL,
-         view=admin.site.urls),
-    path(route='api/accounts/',
-         view=include('accounts.urls')),
-    path(route='api/schema/',
-         view=SpectacularAPIView.as_view(),
-         name='schema'),
-    path(route='api/swagger/',
-         view=SpectacularSwaggerView.as_view(),
-         name='swagger-ui'),
+    path(route='login/',
+         view=TokenObtainPairView.as_view(),
+         name='accounts.login'),
+    path(route='refresh/',
+         view=TokenRefreshView.as_view(),
+         name='accounts.refresh'),
 ]
