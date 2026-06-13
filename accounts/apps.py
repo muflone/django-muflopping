@@ -21,5 +21,5 @@
 from django.apps import AppConfig
 
 
-class AccountsConfig(AppConfig):
+class Config(AppConfig):
     name = "accounts"
