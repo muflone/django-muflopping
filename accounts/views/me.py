@@ -18,26 +18,17 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from django.urls import path
+from rest_framework import generics, permissions
 
-from rest_framework_simplejwt.views import (TokenObtainPairView,
-                                            TokenRefreshView)
-
-from .views.me import MeView
-from .views.register import RegisterView
+from accounts.serializers.user import UserSerializer
 
 
-urlpatterns = [
-    path(route='login/',
-         view=TokenObtainPairView.as_view(),
-         name='accounts.login'),
-    path(route='me/',
-         view=MeView.as_view(),
-         name='accounts.me'),
-    path(route='register/',
-         view=RegisterView.as_view(),
-         name='accounts.register'),
-    path(route='refresh/',
-         view=TokenRefreshView.as_view(),
-         name='accounts.refresh'),
-]
+class MeView(generics.RetrieveUpdateAPIView):
+    """
+    GET/PATCH /api/accounts/me/
+    """
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self):
+        return self.request.user

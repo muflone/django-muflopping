@@ -18,26 +18,15 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from django.urls import path
+from django.contrib.auth import get_user_model
 
-from rest_framework_simplejwt.views import (TokenObtainPairView,
-                                            TokenRefreshView)
-
-from .views.me import MeView
-from .views.register import RegisterView
+from rest_framework import serializers
 
 
-urlpatterns = [
-    path(route='login/',
-         view=TokenObtainPairView.as_view(),
-         name='accounts.login'),
-    path(route='me/',
-         view=MeView.as_view(),
-         name='accounts.me'),
-    path(route='register/',
-         view=RegisterView.as_view(),
-         name='accounts.register'),
-    path(route='refresh/',
-         view=TokenRefreshView.as_view(),
-         name='accounts.refresh'),
-]
+User = get_user_model()
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'email')
