@@ -17,23 +17,3 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
-
-from django.urls import path
-
-from rest_framework_simplejwt.views import (TokenObtainPairView,
-                                            TokenRefreshView)
-
-from .views.register import RegisterView
-
-
-urlpatterns = [
-    path(route='login/',
-         view=TokenObtainPairView.as_view(),
-         name='accounts.login'),
-    path(route='register/',
-         view=RegisterView.as_view(),
-         name='accounts.register'),
-    path(route='refresh/',
-         view=TokenRefreshView.as_view(),
-         name='accounts.refresh'),
-]
