@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     # Local apps
     'accounts.apps.Config',
+    'muflopping.apps.Config',
 ]
 
 MIDDLEWARE = [
