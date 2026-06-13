@@ -47,6 +47,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Third-party
+    'drf_spectacular',
+    'rest_framework',
     # Local apps
     'accounts.apps.Config',
 ]
@@ -129,3 +132,11 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 AUTH_USER_MODEL = 'accounts.User'
+
+# Django REST Framework
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": (
+        "rest_framework.permissions.IsAuthenticated",
+    ),
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}

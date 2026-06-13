@@ -22,7 +22,17 @@ import django.conf
 from django.contrib import admin
 from django.urls import path
 
+from drf_spectacular.views import (SpectacularAPIView,
+                                   SpectacularSwaggerView)
+
+
 urlpatterns = [
     path(route=django.conf.settings.ADMIN_URL,
          view=admin.site.urls),
+    path(route='api/schema/',
+         view=SpectacularAPIView.as_view(),
+         name='schema'),
+    path(route='api/swagger/',
+         view=SpectacularSwaggerView.as_view(),
+         name='swagger-ui'),
 ]
