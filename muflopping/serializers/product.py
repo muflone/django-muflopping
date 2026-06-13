@@ -18,12 +18,22 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from django.urls import include, path
+from rest_framework import serializers
+
+from muflopping.models.product import Product
 
 
-urlpatterns = [
-    path(route='categories/',
-         view=include('muflopping.urls.category')),
-    path(route='products/',
-         view=include('muflopping.urls.product')),
-]
+class ProductSerializer(serializers.ModelSerializer):
+    category_name = serializers.CharField(
+        source='category.name',
+        read_only=True,
+    )
+    created_by = serializers.HiddenField(
+        default=serializers.CurrentUserDefault(),
+    )
+
+    class Meta:
+        model = Product
+        fields = ('id', 'name', 'category', 'category_name', 'image',
+                  'is_global', 'created_by', 'created_at')
+        read_only_fields = ('id', 'created_at', 'is_global')

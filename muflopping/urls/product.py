@@ -18,12 +18,17 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from django.urls import include, path
+from django.urls import path
+
+from muflopping.views.product import (ProductDetailView,
+                                      ProductListCreateView)
 
 
 urlpatterns = [
-    path(route='categories/',
-         view=include('muflopping.urls.category')),
-    path(route='products/',
-         view=include('muflopping.urls.product')),
+    path(route='',
+         view=ProductListCreateView.as_view(),
+         name='product.list'),
+    path(route='<int:pk>/',
+         view=ProductDetailView.as_view(),
+         name='product.detail'),
 ]
