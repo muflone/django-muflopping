@@ -18,13 +18,12 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from django.contrib import admin
+from rest_framework import serializers
 
-from .models.category import Category, CategoryAdmin
-from .models.list import List, ListAdmin
-from .models.product import Product, ProductAdmin
+from muflopping.models.list import List
 
 
-admin.site.register(Category, CategoryAdmin)
-admin.site.register(List, ListAdmin)
-admin.site.register(Product, ProductAdmin)
+class ListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = List
+        fields = ('id', 'name', 'created_at', 'updated_at')

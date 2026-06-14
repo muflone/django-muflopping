@@ -24,6 +24,8 @@ from django.urls import include, path
 urlpatterns = [
     path(route='categories/',
          view=include('muflopping.urls.category')),
+    path(route='lists/',
+         view=include('muflopping.urls.list')),
     path(route='products/',
          view=include('muflopping.urls.product')),
 ]

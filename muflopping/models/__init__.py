@@ -19,4 +19,5 @@
 ##
 
 from .category import Category                                    # noqa: F401
+from .list import List                                            # noqa: F401
 from .product import Product                                      # noqa: F401

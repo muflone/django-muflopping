@@ -18,13 +18,17 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from django.contrib import admin
+from rest_framework import permissions
 
-from .models.category import Category, CategoryAdmin
-from .models.list import List, ListAdmin
-from .models.product import Product, ProductAdmin
+from muflopping.models.list import List
 
 
-admin.site.register(Category, CategoryAdmin)
-admin.site.register(List, ListAdmin)
-admin.site.register(Product, ProductAdmin)
+class IsListOwner(permissions.BasePermission):
+    """
+    Grants access only if the shopping list belongs to the requesting user
+    """
+
+    def has_object_permission(self, request, view, obj):
+        if isinstance(obj, List):
+            return obj.owner == request.user
+        return False

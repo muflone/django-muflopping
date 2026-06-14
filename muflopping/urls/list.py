@@ -18,13 +18,17 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from django.contrib import admin
+from django.urls import path
 
-from .models.category import Category, CategoryAdmin
-from .models.list import List, ListAdmin
-from .models.product import Product, ProductAdmin
+from muflopping.views.list import (ListDetailView,
+                                   ListListCreateView)
 
 
-admin.site.register(Category, CategoryAdmin)
-admin.site.register(List, ListAdmin)
-admin.site.register(Product, ProductAdmin)
+urlpatterns = [
+    path(route='',
+         view=ListListCreateView.as_view(),
+         name='list.list'),
+    path(route='<int:pk>/',
+         view=ListDetailView.as_view(),
+         name='list.detail'),
+]
