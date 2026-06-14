@@ -26,7 +26,7 @@ from muflopping.serializers.category import CategorySerializer
 
 class CategoryListCreateView(generics.ListCreateAPIView):
     """
-    GET/POST /api/products/categories/
+    GET/POST /api/categories/
     """
     serializer_class = CategorySerializer
     permission_classes = [permissions.DjangoModelPermissions]
@@ -35,7 +35,7 @@ class CategoryListCreateView(generics.ListCreateAPIView):
 
 class CategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
     """
-    GET/PUT/PATCH/DELETE /api/products/categories/<pk>/
+    GET/PUT/PATCH/DELETE /api/categories/<pk>/
     """
     serializer_class = CategorySerializer
     permission_classes = [permissions.DjangoModelPermissions]

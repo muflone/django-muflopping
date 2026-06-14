@@ -26,9 +26,8 @@ from muflopping.models.list import List
 
 class IsListOwner(permissions.BasePermission):
     """
-    Grants access only if the shopping list belongs to the requesting user
+    Grants access only if the list belongs to the requesting user
     """
-
     def has_object_permission(self, request, view, obj):
         if isinstance(obj, List):
             return obj.owner == request.user
