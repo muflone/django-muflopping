@@ -18,8 +18,17 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from .category import Category                                    # noqa: F401
-from .item import Item                                            # noqa: F401
-from .list import List                                            # noqa: F401
-from .product import Product                                      # noqa: F401
-from .unit import Unit                                            # noqa: F401
+from django.urls import path
+
+from muflopping.views.item import (ItemDetailView,
+                                   ItemListCreateView)
+
+
+urlpatterns = [
+    path(route='',
+         view=ItemListCreateView.as_view(),
+         name='item.list'),
+    path(route='<int:pk>/',
+         view=ItemDetailView.as_view(),
+         name='item.detail'),
+]

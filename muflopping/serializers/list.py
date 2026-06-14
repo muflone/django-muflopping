@@ -24,6 +24,11 @@ from muflopping.models.list import List
 
 
 class ListSerializer(serializers.ModelSerializer):
+    item_count = serializers.SerializerMethodField()
+
     class Meta:
         model = List
-        fields = ('id', 'name', 'created_at', 'updated_at')
+        fields = ('id', 'name', 'item_count', 'created_at', 'updated_at')
+
+    def get_item_count(self, obj):
+        return obj.items.count()

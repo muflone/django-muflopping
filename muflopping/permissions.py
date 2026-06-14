@@ -20,6 +20,7 @@
 
 from rest_framework import permissions
 
+from muflopping.models.item import Item
 from muflopping.models.list import List
 
 
@@ -31,4 +32,6 @@ class IsListOwner(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         if isinstance(obj, List):
             return obj.owner == request.user
+        if isinstance(obj, Item):
+            return obj.list.owner == request.user
         return False

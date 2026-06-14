@@ -19,36 +19,54 @@
 ##
 
 from django.contrib import admin
-from django.contrib.auth import get_user_model
 from django.db import models
 
-from .item import ItemInlineAdmin
+from .product import Product
+from .unit import Unit
 
 
-class List(models.Model):
-    owner = models.ForeignKey(
-        to=get_user_model(),
+class Item(models.Model):
+    """
+    Items for the shopping lists.
+    """
+    list = models.ForeignKey(
+        to='List',
         on_delete=models.CASCADE,
-        related_name='lists',
+        related_name='items',
     )
-    name = models.CharField(
-        max_length=200,
+    product = models.ForeignKey(
+        to=Product,
+        on_delete=models.PROTECT,
+        related_name='items',
     )
-    created_at = models.DateTimeField(
-        auto_now_add=True,
+    quantity = models.IntegerField(
+        default=1,
     )
-    updated_at = models.DateTimeField(
-        auto_now=True,
+    unit = models.ForeignKey(
+        to=Unit,
+        on_delete=models.PROTECT,
+        related_name='items',
+    )
+    is_checked = models.BooleanField(
+        default=False,
+    )
+    note = models.TextField(
+        blank=True,
     )
 
     class Meta:
-        ordering = ['-updated_at']
+        ordering = ['product__category__order', 'product__category__name',
+                    'product__name']
 
     def __str__(self):
-        return f'{self.name} ({self.owner})'
+        return f'{self.product.name} × {self.quantity} {self.unit}'
 
 
-class ListAdmin(admin.ModelAdmin):
-    list_display = ('name', 'owner', 'created_at', 'updated_at')
-    list_filter = ('owner',)
-    inlines = [ItemInlineAdmin]
+class ItemAdmin(admin.ModelAdmin):
+    list_display = ('product', 'list', 'quantity', 'unit', 'is_checked')
+    list_filter = ('list', )
+
+
+class ItemInlineAdmin(admin.TabularInline):
+    model = Item
+    extra = 0

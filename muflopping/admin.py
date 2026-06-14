@@ -21,12 +21,14 @@
 from django.contrib import admin
 
 from .models.category import Category, CategoryAdmin
+from .models.item import Item, ItemAdmin
 from .models.list import List, ListAdmin
 from .models.product import Product, ProductAdmin
 from .models.unit import Unit, UnitAdmin
 
 
 admin.site.register(Category, CategoryAdmin)
+admin.site.register(Item, ItemAdmin)
 admin.site.register(List, ListAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Unit, UnitAdmin)

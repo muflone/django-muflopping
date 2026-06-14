@@ -18,8 +18,33 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from .category import Category                                    # noqa: F401
-from .item import Item                                            # noqa: F401
-from .list import List                                            # noqa: F401
-from .product import Product                                      # noqa: F401
-from .unit import Unit                                            # noqa: F401
+from rest_framework import serializers
+
+from muflopping.models.item import Item
+
+
+class ItemSerializer(serializers.ModelSerializer):
+    product_name = serializers.CharField(
+        source='product.name',
+        read_only=True,
+    )
+    product_image = serializers.ImageField(
+        source='product.image',
+        read_only=True,
+    )
+    product_category = serializers.CharField(
+        source='product.category.name',
+        read_only=True,
+    )
+    unit_name = serializers.CharField(
+        source='unit.name',
+        read_only=True,
+    )
+
+    class Meta:
+        model = Item
+        fields = (
+            'id', 'product', 'product_name', 'product_image',
+            'product_category', 'unit_name',
+            'quantity', 'unit', 'is_checked', 'note',
+        )
