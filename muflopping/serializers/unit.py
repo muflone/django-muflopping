@@ -18,7 +18,12 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from .category import Category                                    # noqa: F401
-from .list import List                                            # noqa: F401
-from .product import Product                                      # noqa: F401
-from .unit import Unit                                            # noqa: F401
+from rest_framework import serializers
+
+from muflopping.models.unit import Unit
+
+
+class UnitSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Unit
+        fields = ('id', 'name', 'order')

@@ -18,7 +18,31 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from .category import Category                                    # noqa: F401
-from .list import List                                            # noqa: F401
-from .product import Product                                      # noqa: F401
-from .unit import Unit                                            # noqa: F401
+
+from django.contrib import admin
+from django.db import models
+
+
+class Unit(models.Model):
+    """
+    Unit
+    """
+    name = models.CharField(
+        max_length=100,
+        unique=True,
+    )
+    order = models.PositiveIntegerField(
+        default=0,
+    )
+
+    class Meta:
+        ordering = ['order', 'name']
+        verbose_name_plural = 'units'
+
+    def __str__(self):
+        return self.name
+
+
+class UnitAdmin(admin.ModelAdmin):
+    list_display = ('name', 'order')
+    ordering = ('order', 'name')

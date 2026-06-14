@@ -28,4 +28,6 @@ urlpatterns = [
          view=include('muflopping.urls.list')),
     path(route='products/',
          view=include('muflopping.urls.product')),
+    path(route='units/',
+         view=include('muflopping.urls.unit')),
 ]

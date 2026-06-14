@@ -18,7 +18,25 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from .category import Category                                    # noqa: F401
-from .list import List                                            # noqa: F401
-from .product import Product                                      # noqa: F401
-from .unit import Unit                                            # noqa: F401
+from rest_framework import generics, permissions
+
+from muflopping.models.unit import Unit
+from muflopping.serializers.unit import UnitSerializer
+
+
+class UnitListCreateView(generics.ListCreateAPIView):
+    """
+    GET/POST /api/units/
+    """
+    serializer_class = UnitSerializer
+    permission_classes = [permissions.DjangoModelPermissions]
+    queryset = Unit.objects.all()
+
+
+class UnitDetailView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    GET/PUT/PATCH/DELETE /api/units/<pk>/
+    """
+    serializer_class = UnitSerializer
+    permission_classes = [permissions.DjangoModelPermissions]
+    queryset = Unit.objects.all()
