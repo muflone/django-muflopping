@@ -64,7 +64,7 @@ class Item(models.Model):
 
 class ItemAdmin(admin.ModelAdmin):
     list_display = ('product', 'list', 'quantity', 'unit', 'is_checked')
-    list_filter = ('list', )
+    list_filter = ('list', 'is_checked')
 
 
 class ItemInlineAdmin(admin.TabularInline):
