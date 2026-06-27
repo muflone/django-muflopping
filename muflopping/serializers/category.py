@@ -26,4 +26,4 @@ from muflopping.models.category import Category
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ('id', 'name', 'order')
+        fields = ('id', 'name', 'order', 'image')

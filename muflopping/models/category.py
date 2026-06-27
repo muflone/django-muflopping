@@ -33,6 +33,11 @@ class Category(models.Model):
     order = models.PositiveIntegerField(
         default=0,
     )
+    image = models.ImageField(
+        upload_to='categories/',
+        blank=True,
+        null=True,
+    )
 
     class Meta:
         ordering = ['order', 'name']
