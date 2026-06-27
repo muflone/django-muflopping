@@ -22,4 +22,3 @@ RUN tar xzf "/tmp/${app_name}-${app_version}.tar.gz" -C "/tmp" && \
     touch /var/lib/django-muflopping.sqlite3
 EXPOSE 8080/tcp
 CMD ["sh", "/app/container-launch.sh", "8080"]
-
