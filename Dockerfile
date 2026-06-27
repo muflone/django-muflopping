@@ -16,10 +16,10 @@ RUN tar xzf "/tmp/${app_name}-${app_version}.tar.gz" -C "/tmp" && \
     rm "/tmp/${app_name}-${app_version}.tar.gz" && \
     mv "/tmp/${app_name}-${app_version}" "/app" && \
     echo "SECRET_KEY = '$(date +%s | sha256sum | base64 | head -c 50)'" >> "/app/project/settings_container.py" && \
-    echo "ALLOWED_HOSTS = '*'" >> "/app/project/settings_container.py" && \
+    echo "ALLOWED_HOSTS = ['*']" >> "/app/project/settings_container.py" && \
     mkdir "/app/static" && \
     pip install -r /app/requirements.txt && \
     touch /var/lib/django-muflopping.sqlite3
 EXPOSE 8080/tcp
-CMD ["bash", "/app/container-launch.sh", "8080"]
+CMD ["sh", "/app/container-launch.sh", "8080"]
 
