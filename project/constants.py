@@ -19,4 +19,4 @@
 ##
 
 PRODUCT_NAME = 'Django Muflopping'
-VERSION = '0.1.0'
+VERSION = '0.1.1'
