@@ -23,6 +23,7 @@ from django.contrib import admin
 from django.db import models
 
 from .category import Category
+from .unit import Unit
 
 
 class Product(models.Model):
@@ -50,6 +51,14 @@ class Product(models.Model):
     is_global = models.BooleanField(
         default=False,
     )
+    unit = models.ForeignKey(
+        to=Unit,
+        blank=False,
+        null=True,
+        default=None,
+        on_delete=models.PROTECT,
+        related_name='products',
+    )
     created_by = models.ForeignKey(
         to=settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -69,7 +78,7 @@ class Product(models.Model):
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category', 'is_global',
+    list_display = ('name', 'category', 'is_global', 'unit',
                     'created_by', 'created_at')
     list_filter = ('is_global', 'category')
     search_fields = ('name', )
