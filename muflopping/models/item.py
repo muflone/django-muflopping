@@ -22,7 +22,6 @@ from django.contrib import admin
 from django.db import models
 
 from .product import Product
-from .unit import Unit
 
 
 class Item(models.Model):
@@ -42,11 +41,6 @@ class Item(models.Model):
     quantity = models.IntegerField(
         default=1,
     )
-    unit = models.ForeignKey(
-        to=Unit,
-        on_delete=models.PROTECT,
-        related_name='items',
-    )
     is_checked = models.BooleanField(
         default=False,
     )
@@ -59,11 +53,11 @@ class Item(models.Model):
                     'product__name']
 
     def __str__(self):
-        return f'{self.product.name} × {self.quantity} {self.unit}'
+        return f'{self.product.name} × {self.quantity} {self.product.unit}'
 
 
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ('product', 'list', 'quantity', 'unit', 'is_checked')
+    list_display = ('product', 'list', 'quantity', 'is_checked')
     list_filter = ('list', 'is_checked')
 
 

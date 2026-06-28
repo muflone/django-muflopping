@@ -36,15 +36,11 @@ class ItemSerializer(serializers.ModelSerializer):
         source='product.category.name',
         read_only=True,
     )
-    unit_name = serializers.CharField(
-        source='unit.name',
-        read_only=True,
-    )
 
     class Meta:
         model = Item
         fields = (
             'id', 'product', 'product_name', 'product_image',
-            'product_category', 'unit_name',
-            'quantity', 'unit', 'is_checked', 'note',
+            'product_category',
+            'quantity', 'is_checked', 'note',
         )
