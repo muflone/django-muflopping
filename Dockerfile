@@ -2,7 +2,7 @@ FROM python:3.14.5-alpine3.23
 
 # App information
 ENV app_name=django-muflopping
-ENV app_version=0.1.0
+ENV app_version=0.1.1
 
 # Container metadata
 LABEL maintainer="ilmuflone"
