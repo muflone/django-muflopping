@@ -18,16 +18,11 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from .settings import *
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'djaoadicc3a0c3 3aov 2v3op2voiv91 v9301 3v-2313v1va'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+from .settings import *                                     # noqa: F401, F403
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
+DEBUG = True
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators

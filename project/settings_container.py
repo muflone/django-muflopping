@@ -20,12 +20,15 @@
 
 from .settings import *                                     # noqa: F401, F403
 
-
-DEBUG = False
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': '/var/lib/django-muflopping.sqlite3',
     }
 }
+
+MEDIA_ROOT = BASE_DIR / 'media'                                   # noqa: F405
+STATIC_ROOT = BASE_DIR / 'static'                                 # noqa: F405
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+USE_X_FORWARDED_HOST = True
